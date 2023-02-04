@@ -28,6 +28,17 @@ nav a {
     text-decoration: none;
 }
 
+/* ==== NAVIGATION END === */
+
+footer {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ==== HOME PAGE === */
+
 header {
     display: flex;
     justify-content: center;
@@ -66,8 +77,11 @@ section .content .text-detail p.col {
     padding: 5%;
 }
 
-footer {
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: center;
+/* ==== HOME PAGE END === */
+
+
+/* ==== PROJECTS PAGE === */
+section.projects {
+    height: 95vh;
 }
+/* ==== PROJECTS PAGE END === */
