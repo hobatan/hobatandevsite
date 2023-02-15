@@ -91,6 +91,13 @@ section {
     justify-content: center;
 }
 
+section.home {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(../images/お供/hlcow.png);
+    background-size: 100%, 10%;
+    background-repeat: no-repeat, repeat;
+    position: relative;
+}
+
 section .content {
     width: 100%;
     display: flex;
@@ -101,6 +108,34 @@ section .content {
 section .content .subtitle {
     
 }
+
+section.home #animal-friend {
+    width: 120px;
+    position: absolute;
+    right: 0;
+    bottom: 15%;
+    animation: walk-across;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+@keyframes walk-across {
+    0% {
+        right: 0;
+        scale: 100%;
+    }
+    50% {
+        right: 30%;
+        scale: 50%;
+    }
+    100% {
+        right: 100%;
+        scale: 100%;
+    }
+}
+#animal-friend img{
+    width: 100%;
+}
+
 section .content .text-detail {
     display: flex;
     width: 66%;
@@ -108,7 +143,10 @@ section .content .text-detail {
 }
 
 section .content .text-detail p.col {
-    padding: 5%;
+    padding: 5% 8%;
+    /* border: 1px solid red; */
+    width: 50%;
+    line-height: 2rem;
 }
 
 section.sns-info {
