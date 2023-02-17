@@ -5,19 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <!-- <script src="https://unpkg.com/petite-vue" defer init></script> -->
     <title>どこ恥devサイト</title>
 </head>
 <body>
     <nav>
-        <div class="logo-area">
-            <a href="/">
-                <img src="./images/logo_transp.png" />
-                どこ恥.DEV
-            </a>
-        </div>
-        <div class="nav-items">
-            <div class="nav-link">
-                <a href="/projects">プロジェクト</a>
+        <div class="content">
+            <div class="logo-area">
+                <a href="/">
+                    <img src="./images/logo_transp.png" />
+                    どこ恥.DEV
+                </a>
+            </div>
+            <div class="nav-items">
+                <div class="nav-link">
+                    <a href="/projects">プロジェクト</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -29,8 +32,8 @@
     </header>
     <section class="home">
         <div class="content">
-            <div id="animal-friend">
-                <img src="./images/お供/capy.png" />
+            <div id="animal-friend" class="walk-across">
+                <img class="hop" src="./images/お供/capy.png" />
             </div>
             <h3 class="subtitle">どこ恥とは</h3>
             <div class="text-detail">
@@ -75,9 +78,78 @@
             </div>
         </div>
     </section>
+    <section class="dev-friends-area">
+        <div class="content">
+            <div class="casting-zone">
+                <div class="friend-card" v-for="friend, idx in friends">
+                    <div class="friend-item" :class="senbatsu.includes(friend)? 'selected': ''" @click="selectFriend(idx)">
+                        <img :src="`./images/お供/${friend}.png`" width="80"/>
+                    </div>
+                    <div class="friend-actions">
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="shake" value="shake" />
+                            <label for="shake">震える</label>
+                        </div>
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="wheel" value="wheel" />
+                            <label for="wheel">回る</label>
+                        </div>
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="swing" value="swing" />
+                            <label for="swing">揺れる</label>
+                        </div>
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="hop" value="hop" />
+                            <label for="hop"></label>跳ねる</label>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="stage-zone">
+                <h2>★Hajy's期間限定SHOW★</h2>
+                <div class="stage">
+                    <div class="on-stage" v-for="member, idx in senbatsu">
+                        <img :class="friendAction[idx]" :src="`./images/お供/${member}.png`"" width="100"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <footer>
         <p>2023 All Rights Reserved @dokohaji.dev</p>
     </footer>
-    
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+        createApp({
+            message: '',
+            friends: ["beaver", "capy", "eleph", "hlcow", "shark", "sheeptrio"],
+            senbatsu: [],
+            friendAction: [],
+
+            selectFriend(id) {
+                var selectFriend = this.friends[id];
+                if (this.senbatsu.includes(selectFriend)) {
+                    console.log(`${selectFriend}が選抜組から降ろされました。`);
+                    this.friendAction.splice(this.senbatsu.indexOf(selectFriend), 1);
+                    this.senbatsu.splice(this.senbatsu.indexOf(selectFriend), 1); 
+                } else {
+                    this.senbatsu.push(selectFriend);
+                    console.log(`${selectFriend}が選抜組に加入しました！`);
+                    this.friendApplyAction(this.senbatsu.indexOf(selectFriend), 'no-action');
+                }
+            },
+            friendApplyAction(id, action) {
+                if (!this.senbatsu.includes(this.friends[id])) {
+                    this.selectFriend(id);
+                }
+
+                console.log(`「${action}」を${this.friends[id]}に指示しました。`);
+                var stagePosition = this.senbatsu.indexOf(this.friends[id]);
+                this.friendAction.splice(stagePosition, 1, action); 
+
+            }
+        }).mount()
+    </script>
 </body>
 </html>
