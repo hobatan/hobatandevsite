@@ -136,7 +136,8 @@
                 } else {
                     this.senbatsu.push(selectFriend);
                     console.log(`${selectFriend}が選抜組に加入しました！`);
-                    this.friendApplyAction(this.senbatsu.indexOf(selectFriend), 'no-action');
+                    // this.friendApplyAction(this.senbatsu.indexOf(selectFriend), 'no-action');
+                    this.friendApplyAction(id, 'no-action');
                 }
             },
             friendApplyAction(id, action) {
