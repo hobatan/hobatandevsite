@@ -5,19 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <title>ほばたんdevサイト</title>
+    <!-- <script src="https://unpkg.com/petite-vue" defer init></script> -->
+    <title>どこ恥devサイト</title>
 </head>
 <body>
     <nav>
-        <div class="logo-area">
-            <a href="/">
-                <!-- <img src="#" /> -->
-                ロゴ
-            </a>
-        </div>
-        <div class="nav-items">
-            <div class="nav-link">
-                <a href="/projects">プロジェクト</a>
+        <div class="content">
+            <div class="logo-area">
+                <a href="/">
+                    <img src="./images/logo_transp.png" />
+                    どこ恥.DEV
+                </a>
+            </div>
+            <div class="nav-items">
+                <div class="nav-link">
+                    <a href="/projects">プロジェクト</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -25,31 +28,129 @@
         <div class="content">
             <h1>色々載せていくよ！</h1>
         </div>
+        <img class="top-image" src="./images/top_thumb.png" />
     </header>
     <section class="home">
         <div class="content">
+            <div id="animal-friend" class="walk-across">
+                <img class="hop" src="./images/お供/capy.png" />
+            </div>
             <h3 class="subtitle">どこ恥とは</h3>
             <div class="text-detail">
                 <p class="col">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
-                    officia deserunt mollit anim id est laborum.
+                    このウェブサイトは<b>どこに出しても恥ずかしい</b>系のディベロッパー・開発者であるほばたんが
+                    一人前に成長していく様を<b>記録するために作られたサイト</b>です。
+                    <br />
+                    <br />
+                    YouTube動画とともに、ほばたんが一人で、または教授の力を借りながら、
+                    仕上げる<b>開発プロジェクトを順次載せていきます。</b>
+                    <br />
+                    <br />
+                    プロジェクトのソースコードは基本載せますが、<em>安定性は一切保証しません。</em>
                 </p>
                 <p class="col">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-                    deserunt mollit anim id est laborum.
+                    <b>ほばたんって誰？</b>
+                    <br />
+                    <br />
+                    小さい頃の夢である発明家に憧れ、異業種からIT業界へ転身()をしたはいいが、
+                    独学で身に付けたプログラミングの危うさが開発品の挙動の怪しさやコードの謎さに見事に反映
+                    されることに日々悩んでいるディベロッパー。
+                    <br />
+                    <br />
+                    世間に学習過程や猛省する姿を晒すことにより、さらなる成長が期待される。
                 </p>
+            </div>
+        </div>
+    </section>
+    <section class="sns-info">
+        <div class="content">
+            <div class="sns-item">
+                <img class="icon" src="./images/github_icon.svg" />
+                <a href="https://github.com/hobatan" class="sns-link" target="_blank">https://github.com/hobatan</a>
+            </div>
+            <div class="sns-item">
+                <img class="icon" src="./images/twitter_icon.svg" />
+                <a href="https://twitter.com/dokohaji" class="sns-link" target="_blank">https://twitter.com/dokohaji</a>
+            </div>
+            <div class="sns-item">
+                <img class="icon" src="./images/youtube_icon.svg" />
+                <a href="https://www.youtube.com/@dokohaji" class="sns-link" target="_blank">https://www.youtube.com/@dokohaji</a>
+            </div>
+        </div>
+    </section>
+    <section class="dev-friends-area">
+        <div class="content">
+            <div class="casting-zone">
+                <div class="friend-card" v-for="friend, idx in friends">
+                    <div class="friend-item" :class="senbatsu.includes(friend)? 'selected': ''" @click="selectFriend(idx)">
+                        <img :src="`./images/お供/${friend}.png`" width="80"/>
+                    </div>
+                    <div class="friend-actions">
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="shake" value="shake" />
+                            <label for="shake">震える</label>
+                        </div>
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="wheel" value="wheel" />
+                            <label for="wheel">回る</label>
+                        </div>
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="swing" value="swing" />
+                            <label for="swing">揺れる</label>
+                        </div>
+                        <div class="action">
+                            <input @change="friendApplyAction(idx, event.target.value)" type="radio" :name="`stage-action-${idx}`" id="hop" value="hop" />
+                            <label for="hop"></label>跳ねる</label>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="stage-zone">
+                <h2>★Hajy's期間限定SHOW★</h2>
+                <div class="stage">
+                    <div class="on-stage" v-for="member, idx in senbatsu">
+                        <img :class="friendAction[idx]" :src="`./images/お供/${member}.png`"" width="100"/>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <footer>
         <p>2023 All Rights Reserved @dokohaji.dev</p>
     </footer>
-    
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+        createApp({
+            message: '',
+            friends: ["beaver", "capy", "eleph", "hlcow", "shark", "sheeptrio"],
+            senbatsu: [],
+            friendAction: [],
+
+            selectFriend(id) {
+                var selectFriend = this.friends[id];
+                if (this.senbatsu.includes(selectFriend)) {
+                    console.log(`${selectFriend}が選抜組から降ろされました。`);
+                    this.friendAction.splice(this.senbatsu.indexOf(selectFriend), 1);
+                    this.senbatsu.splice(this.senbatsu.indexOf(selectFriend), 1); 
+                } else {
+                    this.senbatsu.push(selectFriend);
+                    console.log(`${selectFriend}が選抜組に加入しました！`);
+                    // this.friendApplyAction(this.senbatsu.indexOf(selectFriend), 'no-action');
+                    this.friendApplyAction(id, 'no-action');
+                }
+            },
+            friendApplyAction(id, action) {
+                if (!this.senbatsu.includes(this.friends[id])) {
+                    this.selectFriend(id);
+                }
+
+                console.log(`「${action}」を${this.friends[id]}に指示しました。`);
+                var stagePosition = this.senbatsu.indexOf(this.friends[id]);
+                this.friendAction.splice(stagePosition, 1, action); 
+
+            }
+        }).mount()
+    </script>
 </body>
 </html>
